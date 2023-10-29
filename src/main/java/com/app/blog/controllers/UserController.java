@@ -25,28 +25,28 @@ public class UserController {
 
     final String USER_DELETED = "User deleted successfully";
     @PostMapping(value = "/api/users", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
+    private ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDto));
     }
 
     @PutMapping(value = "/api/users/{userId}", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @NotNull @PathVariable Integer userId) {
+    private ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @NotNull @PathVariable Integer userId) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(userDto,userId));
     }
 
     @GetMapping(value = "/api/users/{userId}", produces = "application/json")
-    public ResponseEntity<UserDto> getUserById(@NotNull @PathVariable Integer userId) {
+    private ResponseEntity<UserDto> getUserById(@NotNull @PathVariable Integer userId) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(userId));
     }
 
     @DeleteMapping(value = "/api/users/{userId}", produces = "application/json")
-    public ResponseEntity<GenericResponse> deleteUser(@NotNull @PathVariable Integer userId) {
+    private ResponseEntity<GenericResponse> deleteUser(@NotNull @PathVariable Integer userId) {
         userService.deleteUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(GenericResponse.builder().meta(USER_DELETED).build());
     }
 
     @GetMapping(value = "/api/users", produces = "application/json")
-    public ResponseEntity<List<UserDto>> getAllUsers(){
+    private ResponseEntity<List<UserDto>> getAllUsers(){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
     }
 }
