@@ -1,13 +1,16 @@
 version: '3'
 
 services:
-  postgres:
-    image: postgres:latest
-    container_name: my_postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
     ports:
-      - "5432:5432"
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
     volumes:
-      - /User/suraj/Documents/postgres:/var/lib/postgresql/data
+      - ./data/mysql:/var/lib/mysql
