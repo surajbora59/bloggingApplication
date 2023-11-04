@@ -15,16 +15,19 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
     properties:
-      hibernate:
-        format_sql: true
+#      hibernate:
+#        format_sql: true
       dialect: org.hibernate.dialect.MySQLDialect
-      ddl-auto: create
+#      ddl-auto: create
+  jackson:
+    deserialization:
+      accept-float-as-int: false
 logging:
   level:
     org:
       hibernate:
         SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: TRACE

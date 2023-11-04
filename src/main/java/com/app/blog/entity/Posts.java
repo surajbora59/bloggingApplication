@@ -7,14 +7,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@Data
+@Builder
 @Entity
 @Table(name = "Posts")
 public class Posts {
@@ -23,15 +27,18 @@ public class Posts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer postId;
     private UUID postUuid; // Using byte array to store UUID as BINARY(16)
-    private String ImageUrl;
-    private Integer categoryId;
+    private String imageUrl;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
 
-    @Column(name = "UserId")
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "UserId")
+    private User user;
 
-    private String Title;
+    private String title;
 
-    private String Content;
+    private String content;
 
     @Column(name = "CreatedAt")
     private String createdAt;

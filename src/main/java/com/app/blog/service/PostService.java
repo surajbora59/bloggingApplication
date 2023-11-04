@@ -12,4 +12,9 @@ public interface PostService {
     GenericResponse updatePost(PostRequest postRequest, Integer id);
     void deletePostById(Integer id);
     List<PostDto> getAllPosts();
+
+    List<PostDto> getAllPostsByUserId(Integer userId);
+    List<PostDto> getAllPostsByCategoryId(Integer categoryId);
+    List<PostDto> getAllPostsByUserIdAndCategoryId(Integer userId, Integer categoryId);
+    List<PostDto> searchPostsByTitle(String title);
 }

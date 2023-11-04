@@ -1,9 +1,12 @@
 package com.app.blog.controllers;
 
+import java.util.List;
+
 import com.app.blog.dto.PostDto;
 import com.app.blog.request.PostRequest;
 import com.app.blog.response.GenericResponse;
 import com.app.blog.service.PostService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.websocket.server.PathParam;
@@ -26,7 +29,8 @@ public class PostController {
     PostService postService;
 
     @PostMapping("/add")
-    public ResponseEntity<GenericResponse> addPost(@RequestBody PostRequest postRequest) {
+    public ResponseEntity<GenericResponse> addPost(@RequestBody @Valid PostRequest postRequest) {
+        System.out.println(postRequest.getUserId());
         return ResponseEntity.ok(postService.addPost(postRequest));
     }
 
@@ -44,5 +48,10 @@ public class PostController {
     public ResponseEntity<GenericResponse> deletePostbyId(@PathVariable("id") @NotBlank @NotNull Integer id) {
         postService.deletePostById(id);
         return ResponseEntity.ok(GenericResponse.builder().meta("Post deleted successfully").build());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<PostDto>> getAllPosts() {
+        return ResponseEntity.ok(postService.getAllPosts());
     }
 }
